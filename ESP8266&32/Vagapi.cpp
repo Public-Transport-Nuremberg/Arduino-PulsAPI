@@ -27,6 +27,16 @@ WEBResponse makerequest(String serverPath)
     }
 }
 
+void Vagapi::setProduct(String product)
+{
+    this->_product = product;
+}
+
+void Vagapi::setTimespan(int timespan)
+{
+    this->_timespan = timespan;
+}
+
 String Vagapi::getStops(String stopName)
 {
     String serverPath = _VAGURL + "/haltestellen.json/vgn?name=" + urlEncode(stopName);
@@ -39,6 +49,22 @@ String Vagapi::getStops(String stopName)
     {
         return request.response;
     }
+}
+
+String Vagapi::getStopsGPS(double lat, double lon, int distance)
+{   
+    String serverPath = _VAGURL + "/haltestellen.json/vgn/location?lon=" + lon + "&lat=" + lat + "&radius=" + distance;
+    Serial.println(distance);
+    WEBResponse request = makerequest(serverPath);
+    if (request.httpcode == 200)
+    {
+        return request.response;
+    }
+    else
+    {
+        return request.response;
+    }
+
 }
 
 String Vagapi::getDepartures(int stopID, int limit)

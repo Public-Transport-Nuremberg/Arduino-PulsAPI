@@ -17,10 +17,14 @@ class Vagapi
 private:
     String _VAGURL = "https://start.vag.de/dm/api/v1";
     String _product = "Bus,Tram,UBahn";
-    String _timespan = "60";
+    int _timespan = 60;
 
 public:
+    void setProduct(String product);
+    void setTimespan(int timespan);
+
     String getStops(String stopName);
+    String getStopsGPS(double lat, double lon, int distance = 500);
     String getDepartures(int stopID, int limit);
 };
 #endif
